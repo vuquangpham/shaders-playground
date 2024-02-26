@@ -1,0 +1,49 @@
+$breakpoints: (
+  "mobile": 480px,
+  "tablet": 768px,
+  "desktop": 1024px,
+) !default;
+
+/* Touch devices */
+@media only screen and (max-width: 1180px) {
+  /* Visibility Classes */
+  .hidden-touch-devices {
+    display: none;
+  }
+  .show-touch-devices {
+    display: block;
+  }
+}
+
+/* Tablet horizontal */
+@media only screen and (max-width: 1024px) {
+  /* Visibility Classes */
+  .hidden-tablet-h {
+    display: none;
+  }
+  .show-tablet-h {
+    display: block;
+  }
+}
+
+/* Tablet vertical */
+@media only screen and (max-width: 768px) {
+  /* Visibility Classes */
+  .hidden-tablet-v {
+    display: none;
+  }
+  .show-tablet-v {
+    display: block;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 480px) {
+  /* Visibility Classes */
+  .hidden-mobile {
+    display: none;
+  }
+  .show-mobile {
+    display: block;
+  }
+}

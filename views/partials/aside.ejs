@@ -1,0 +1,47 @@
+<% if (pages.length > 0) { %>
+<aside data-aside class="aside">
+  <div class="aside__inner" data-aside-scroller>
+    <% pages.forEach(page => { %>
+    <div class="aside__item ps-relative" data-aside-item>
+      <div class="aside__item-title"><%= page.title; %></div>
+
+      <% if (page.pages.length > 0) { %>
+      <div class="aside__children">
+        <% page.pages.forEach(childPage => { %>
+
+        <!-- Add active class -->
+        <% const activeClass = typeof pageId !== "undefined" && childPage.id ===
+        pageId ? "active" : '' %>
+
+        <a
+          href="<%= `/${page.base}/${childPage.id}`; %>"
+          class="aside__child-item txt_color_white hover-with-background <%= activeClass %>"
+          data-slug="<%= page.base %>"
+          data-id="<%= childPage.id %>"
+          data-aside-link
+        >
+          <%= childPage.title; %>
+        </a>
+        <% }); %>
+      </div>
+      <% } %>
+    </div>
+    <% }); %>
+  </div>
+
+  <!-- Toggle button -->
+  <button class="aside__button hover-with-background" data-toggle="sidebar">
+    <span class="aside__bar"></span>
+    <span class="aside__bar"></span>
+    <span class="aside__bar"></span>
+    <span class="aside__bar curve"></span>
+    <span class="aside__bar curve"></span>
+  </button>
+  <!-- Overlay -->
+  <div
+    class="ps-fixed t0 l0 r0 b0 z1"
+    style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1"
+    data-toggle="sidebar"
+  ></div>
+</aside>
+<% } %>

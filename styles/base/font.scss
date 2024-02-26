@@ -1,0 +1,35 @@
+/************************
+* Primary Font
+*************************/
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("./fonts/roboto-medium.woff2") format("woff2"),
+    url("./fonts/roboto-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("./fonts/roboto-regular.woff2") format("woff2"),
+    url("./fonts/roboto-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/************************
+* Secondary Font
+*************************/
+@font-face {
+  font-family: "Hindsiliguri";
+  src:
+    url("./fonts/hindsiliguri-medium.woff2") format("woff2"),
+    url("./fonts/hindsiliguri-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

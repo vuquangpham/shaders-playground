@@ -1,0 +1,52 @@
+:root {
+  /* Colors */
+  --color-bg: #fff;
+  --color-text: #000;
+  --color-heading: var(--color-text);
+  --color-permalink: var(--color-text);
+  --color-permalink-highlight: #fff;
+
+  --color-primary: #3292ff;
+  --color-primary-highlight: #c69d07;
+  --color-on-primary: #fff;
+
+  --color-secondary: #1864ab;
+  --color-secondary-highlight: #e0e0e0;
+  --color-on-secondary: #1c1c1c;
+
+  --color-error: #dd4b29;
+  --color-gray: #ccc;
+  --color-white: #fff;
+  --color-placeholder: #1d1b1b80;
+
+  /* font sizes (use exact number to identify) */
+  --size-30: 30px;
+  --size-28: 28px;
+  --size-24: 24px;
+  --size-20: 20px;
+  --size-17: 17px;
+  --size-16: 16px;
+  --size-14: 14px;
+
+  /* Relative font sizes */
+  --size-body: var(--size-16);
+  --size-h1: var(--size-28);
+  --size-h2: var(--size-24);
+  --size-h3: var(--size-20);
+  --size-h4: var(--size-17);
+  --size-h5: var(--size-16);
+  --size-h6: var(--size-16);
+
+  /* Fonts */
+  --font-primary: "Roboto";
+  --font-secondary: "Hindsiliguri";
+
+  /* Container */
+  --100vw: 100vw;
+  --container: 1180px;
+  --gap-container: 40px;
+  --gap-side: clamp(
+    var(--gap-container),
+    calc((var(--100vw) - var(--container)) * 0.5)
+  );
+}

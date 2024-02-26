@@ -1,0 +1,73 @@
+<%- include('../partials/head.ejs', {isHome: true}) %>
+
+<div class="site-content" data-template="home">
+  <div class="container">
+    <div class="boil-content">
+      <h1>Welcome to the Boilp Boilerplate</h1>
+      <p>Create multiple pages application on the fly</p>
+    </div>
+
+    <div class="boil-content">
+      <h2>What we do?</h2>
+      <p>
+        To create a page, just edit the <strong>pages.js</strong> file with the
+        syntax
+      </p>
+      <pre>
+  module.exports = createPagesPrototype([
+    {
+      title: "The category name",
+      base: "category-in-slug",
+      pages: [
+        {
+          title: "Title of a single page",
+        },
+      ],
+    },
+  ]);
+  </pre
+      >
+      <p>
+        It will automatically create for you 2 separate files in
+        <strong>app/pages/slug/</strong> and <strong>views/pages/slug/</strong>
+      </p>
+    </div>
+
+    <div class="boil-content">
+      <h2>Examples</h2>
+
+      <p>
+        Depends on your work. I created this template to control my learning
+        journey at the beginning (because I have to create each file for each
+        lesson 😒), so I just wanna control it all in one place
+      </p>
+
+      <p>I have 2 examples below:</p>
+      <ul>
+        <li>
+          <a href="https://threejs-journey-ruddy.vercel.app/" target="_blank"
+            >Three.js Journey</a
+          >
+          - my learning journey with Three.js, control all lessons in one place
+          :)
+        </li>
+        <li>
+          <a href="https://creative-coding-delta.vercel.app/" target="_blank"
+            >Three.js Journey</a
+          >
+          - my creative corners, I can do all the creative things in my mind in
+          one place :)
+        </li>
+      </ul>
+
+      <p>
+        You can follow the
+        <a href="https://github.com/vuquangpham/threejs-journey" target="_blank"
+          >simple repository here</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/end.ejs') %>

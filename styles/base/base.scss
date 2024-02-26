@@ -1,0 +1,64 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-bg);
+  position: relative;
+
+  color: var(--color-text);
+  font-size: var(--size-body);
+  font-family: var(--font-primary);
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.container {
+  max-width: calc(var(--container) + 2 * var(--gap-container));
+  padding-left: var(--gap-container);
+  padding-right: var(--gap-container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Txt color white */
+.txt_color_white {
+  --color-text: #fff;
+  --color-heading: #fff;
+  color: #fff;
+}
+
+.txt_color_white ul > li:before {
+  background: white;
+  border-color: white;
+}
+
+.txt_color_white a:hover,
+.txt_color_white a:focus {
+  color: var(--color-primary);
+}
+
+/* Make the section full width */
+.container .container-full-width {
+  margin-left: calc(-1 * var(--gap-side));
+  margin-right: calc(-1 * var(--gap-side));
+}
+
+/* for code embedded */
+pre {
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  margin-bottom: 20px;
+  padding: 20px;
+
+  font-size: var(--size-body);
+  font-family: monospace;
+}

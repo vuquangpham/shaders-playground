@@ -1,0 +1,240 @@
+.aside {
+  // vars
+  --counter-width: 60px;
+  --button-size: 48px;
+  --aside-width: 400px;
+
+  // sidebar
+  width: 100%;
+  max-width: calc(var(--aside-width) + var(--button-size));
+  padding: 10px var(--button-size) 10px 10px;
+
+  // position
+  position: fixed;
+  z-index: 99999;
+  top: 80px;
+  bottom: 10px;
+  left: 0;
+
+  // transition
+  transition: transform 0.4s ease;
+
+  // overlay
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: var(--button-size);
+    height: 30%;
+    border-radius: 0 0 10px 10px;
+    background: linear-gradient(to top, #0e0e0e, rgba(0, 0, 0, 0));
+    z-index: 2;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  // inner
+  &__inner {
+    height: 100%;
+    border-radius: 10px;
+    overflow: auto;
+
+    z-index: 2;
+    position: relative;
+
+    background: #0e0e0e;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+
+    // creating counter
+    counter-reset: section;
+  }
+
+  // title
+  &__item-title {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    padding: 10px 20px 10px var(--counter-width);
+    min-height: 75px;
+    border-radius: 10px;
+    background: #1a1a1a;
+
+    font-size: var(--size-20);
+    font-weight: 500;
+    font-family: var(--font-secondary);
+    color: var(--color-primary);
+
+    // creating counter
+    &:before {
+      content: counter(section, decimal-leading-zero);
+      counter-increment: section;
+
+      position: absolute;
+      top: 50%;
+      left: calc(0.2 * var(--counter-width));
+      transform: translateY(-50%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: calc(var(--counter-width) * 0.6);
+      aspect-ratio: 1;
+
+      border-radius: 50%;
+      border: 3px solid currentColor;
+      font-size: 0.7em;
+    }
+  }
+
+  // item
+  &__item {
+    // bottom spacing
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+
+  // children
+  &__children {
+    padding-top: 5px;
+  }
+
+  // child item
+  &__child-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    text-decoration: none;
+
+    overflow: hidden;
+    min-height: 54px;
+    padding: 5px 15px;
+    border-radius: 8px;
+
+    opacity: 0.5;
+
+    // hover
+    &.active,
+    &:hover {
+      opacity: 1;
+      color: #fff;
+    }
+  }
+
+  // button
+  &__button {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    z-index: 3;
+
+    cursor: pointer;
+
+    width: var(--button-size);
+    aspect-ratio: 1;
+    background: rgba(26, 26, 26, 1);
+    border: none;
+    border-radius: 0 5px 5px 0;
+  }
+
+  &__bar {
+    display: block;
+    position: absolute;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 2px;
+    left: 14px;
+
+    border-radius: 2px;
+    background: #fff;
+    transform-origin: 0 center;
+
+    transition: transform 0.3s ease;
+
+    // first line
+    &:first-child {
+      top: calc(50% - 6px);
+      transition-delay: 0.4s;
+    }
+
+    // last line
+    &:nth-child(3) {
+      top: calc(50% + 6px);
+      transition-delay: 0.5s;
+    }
+
+    // curve
+    &.curve {
+      width: 9px;
+      top: calc(50% - 0.5px);
+
+      transform: translateY(-50%) rotate(45deg) scaleX(0);
+      transform-origin: left center;
+
+      transition-delay: 0.6s;
+
+      &:last-child {
+        transform: translateY(-50%) rotate(-45deg) scaleX(0);
+        top: calc(50% + 0.5px);
+
+        transition-delay: 0.6s;
+      }
+    }
+
+    html:not(.sidebar-is-open) &.curve {
+      transition-delay: 0s;
+    }
+
+    html:not(.sidebar-is-open) &.curve:last-child {
+      transition-delay: 0.1s;
+    }
+
+    // animation
+    html.sidebar-is-open &:first-child,
+    html.sidebar-is-open &:nth-child(3) {
+      transform: translateY(-50%) scaleX(0);
+    }
+
+    html.sidebar-is-open &.curve {
+      transform: translateY(-50%) rotate(45deg) scaleX(1);
+    }
+
+    html.sidebar-is-open &.curve:last-child {
+      transform: translateY(-50%) rotate(-45deg) scaleX(1);
+    }
+  }
+
+  html:not(.sidebar-is-open) & {
+    transform: translateX(calc(-100% + var(--button-size)));
+  }
+}
+
+/* Hover with background movement */
+.hover-with-background {
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background: #fff;
+    opacity: 0.05;
+    transform: scaleX(0);
+    transform-origin: 100% 100%;
+    transition: transform 0.4s ease;
+  }
+
+  // hover
+  &:hover:before {
+    transform: scaleX(1);
+    transform-origin: 0 0;
+  }
+}
