@@ -45,7 +45,7 @@
   --100vw: 100vw;
   --container: 1180px;
   --gap-container: 40px;
-  --gap-side: clamp(
+  --gap-side: max(
     var(--gap-container),
     calc((var(--100vw) - var(--container)) * 0.5)
   );
