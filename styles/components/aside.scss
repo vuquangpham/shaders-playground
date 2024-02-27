@@ -1,6 +1,6 @@
 .aside {
   // vars
-  --counter-width: 60px;
+  --counter-width: 40px;
   --button-size: 48px;
   --aside-width: 400px;
 
@@ -58,14 +58,11 @@
     position: relative;
 
     padding: 10px 20px 10px var(--counter-width);
-    min-height: 75px;
+    min-height: 50px;
     border-radius: 10px;
     background: #1a1a1a;
 
-    font-size: var(--size-20);
-    font-weight: 500;
-    font-family: var(--font-secondary);
-    color: var(--color-primary);
+    color: var(--color-white);
 
     // creating counter
     &:before {
@@ -85,8 +82,8 @@
       aspect-ratio: 1;
 
       border-radius: 50%;
-      border: 3px solid currentColor;
-      font-size: 0.7em;
+      border: 1px solid currentColor;
+      font-size: 0.75em;
     }
   }
 
