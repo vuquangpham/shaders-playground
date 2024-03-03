@@ -48,6 +48,11 @@
 
     // creating counter
     counter-reset: section;
+
+    // hide the shadow
+    html:not(.sidebar-is-open) & {
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
   }
 
   // title
@@ -209,6 +214,14 @@
 
   html:not(.sidebar-is-open) & {
     transform: translateX(calc(-100% + var(--button-size)));
+
+    // hide the overlay
+    [data-overlay] {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    // hide the shadow
   }
 }
 
