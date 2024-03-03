@@ -25,13 +25,14 @@ export default class extends Page {
     const instanceName = this.id;
 
     import(`./${instanceName}`).then((instance) => {
-      try {
-        const Page = instance.default;
-        // instance is class base
+      const Page = instance.default;
+
+      // class
+      if (typeof Page === "function") {
         this.instance = new Page({
           element: this.element,
         });
-      } catch (error) {
+      } else {
         // just js file
         this.instance = instance;
       }
