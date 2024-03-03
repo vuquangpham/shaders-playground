@@ -2,6 +2,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const dirApp = path.join(process.cwd(), "app");
 const dirStyles = path.join(process.cwd(), "styles");
@@ -39,6 +40,8 @@ module.exports = {
     ],
   },
   plugins: [
+    new ESLintPlugin(),
+    
     new CleanWebpackPlugin(),
 
     new CopyWebpackPlugin({
