@@ -42,6 +42,8 @@ module.exports = {
     // comparison == vs ===
     eqeqeq: [2, "smart"],
 
+    "no-unused-vars": "off",
+
     "new-cap": 2,
     "one-var-declaration-per-line": [2, "always"],
     "no-case-declarations": 0,

@@ -1,5 +1,8 @@
+import { createNoise2D } from "simplex-noise";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+const noise = createNoise2D();
 
 export default class {
   constructor({ element }) {
@@ -30,7 +33,7 @@ export default class {
       0.001,
       1000,
     );
-    this.camera.position.set(0, 2, 5);
+    this.camera.position.set(0, 0.5, 2);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
   }
 
@@ -44,12 +47,39 @@ export default class {
     // grid helper
     const gridHelper = new THREE.GridHelper(10, 40);
     this.scene.add(gridHelper);
+
+    // mesh
+    this.mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.05, 32, 32),
+      new THREE.MeshNormalMaterial(),
+    );
+    this.scene.add(this.mesh);
   }
 
-  render() {
-    // const elapsedTime = this.clock.getElapsedTime();
+  render(time) {
+    const elapsedTime = this.clock.getElapsedTime();
+    const progress = elapsedTime % 1;
 
+    // create random number from noise
+    const noiseInY = noise(elapsedTime, 0);
+
+    // we want to start at one point => the y value is 0
+    // progress = 0 based on elapsedTime (0, 1, 2, 3, 4, 5, 6)
+    // try to find the formula that at these values, the value is 0
+    // sinx: 0 -> pi/2 -> pi => sinPI.x => 0 -> 1/2 -> 1
+    const power = Math.sin(elapsedTime * Math.PI);
+
+    // update objects
+    this.mesh.position.x = progress - 0.5;
+    this.mesh.position.y = noiseInY * power;
+
+    // update renderer
     this.renderer.render(this.scene, this.camera);
+
+    // update camera
+    this.controls.update();
+
+    // raf
     requestAnimationFrame(this.render.bind(this));
   }
 
