@@ -32,6 +32,7 @@ export default class {
     );
     this.camera.position.set(0, 2, 5);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
   }
 
   setupScene() {
@@ -44,11 +45,25 @@ export default class {
     // grid helper
     const gridHelper = new THREE.GridHelper(10, 40);
     this.scene.add(gridHelper);
+
+    // create simple mesh
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.2, 32, 32),
+      new THREE.MeshNormalMaterial(),
+    );
+    this.scene.add(mesh);
   }
 
   render() {
     // const elapsedTime = this.clock.getElapsedTime();
+
+    // update render
     this.renderer.render(this.scene, this.camera);
+
+    // update camera
+    this.controls.update();
+
+    // raf
     requestAnimationFrame(this.render.bind(this));
   }
 
