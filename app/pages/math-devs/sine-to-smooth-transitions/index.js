@@ -1,3 +1,4 @@
+import { createNoise2D } from "simplex-noise";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
@@ -30,8 +31,9 @@ export default class {
       0.001,
       1000,
     );
-    this.camera.position.set(0, 2, 5);
+    this.camera.position.set(0, 2, 3);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
   }
 
   setupScene() {
@@ -44,12 +46,32 @@ export default class {
     // grid helper
     const gridHelper = new THREE.GridHelper(10, 40);
     this.scene.add(gridHelper);
+
+    // create simple mesh
+    this.mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.05, 32, 32),
+      new THREE.MeshNormalMaterial(),
+    );
+    this.scene.add(this.mesh);
   }
 
-  render() {
-    // const elapsedTime = this.clock.getElapsedTime();
+  render(time) {
+    console.log(cc);
+    const elapsedTime = this.clock.getElapsedTime();
+    const progress = elapsedTime % 1;
+    const oscillate = createNoise2D()(elapsedTime, 0);
 
+    // update position
+    this.mesh.position.x = progress - 0.5;
+    // this.mesh.position.y = oscillate;
+
+    // update render
     this.renderer.render(this.scene, this.camera);
+
+    // update camera
+    this.controls.update();
+
+    // raf
     requestAnimationFrame(this.render.bind(this));
   }
 
