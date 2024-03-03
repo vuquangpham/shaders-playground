@@ -18,6 +18,9 @@ module.exports = createPagesPrototype([
       {
         title: "Sine to smooth transitions",
       },
+      {
+        title: "Sine for texture transitions",
+      },
     ],
   },
 ]);
