@@ -48,7 +48,6 @@ export default class {
 
   render() {
     // const elapsedTime = this.clock.getElapsedTime();
-
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(this.render.bind(this));
   }
