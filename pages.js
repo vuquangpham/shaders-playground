@@ -11,8 +11,13 @@ module.exports = createPagesPrototype([
     pages: [],
   },
   {
-    title: "Yuri Math",
-    base: "yuri-math",
-    pages: [],
+    title: "Math for Creative Devs",
+    description: "https://threejs-workshops.com/workshop/math",
+    base: "math-devs",
+    pages: [
+      {
+        title: "Sine to smooth transitions",
+      },
+    ],
   },
 ]);
