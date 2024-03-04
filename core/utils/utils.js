@@ -50,7 +50,6 @@ const createJsBase = (appPath, baseName, pageId) => {
         if (result === true) {
           return;
         }
-        console.log(result);
       });
 
       // create template.js file
@@ -75,7 +74,6 @@ const createJsBase = (appPath, baseName, pageId) => {
         if (result === true) {
           return;
         }
-        console.log(result);
       });
     });
 };
@@ -120,7 +118,6 @@ const createEngineBase = (appPath, baseName, pageId) => {
         if (result === true) {
           return;
         }
-        console.log(result);
       });
     });
 };
