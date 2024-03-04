@@ -59,6 +59,7 @@ export default class {
     this.mesh = new THREE.Mesh(
       new THREE.PlaneGeometry(1, 1, 64, 64),
       new THREE.ShaderMaterial({
+        side: THREE.DoubleSide,
         uniforms: {
           uTime: { value: 0 },
           uImageA: { value: textureLoader.load(imageA) },
