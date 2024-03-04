@@ -24,6 +24,9 @@ module.exports = createPagesPrototype([
       {
         title: "Gerstner waves with Sine",
       },
+      {
+        title: "Sine to loop noise",
+      },
     ],
   },
 ]);
