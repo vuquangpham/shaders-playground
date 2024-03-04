@@ -1,9 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import vertexShader from "./vertex.glsl";
-import fragmentShader from "./fragment.glsl";
-
 export default class {
   constructor({ element }) {
     this.element = element;
@@ -51,25 +48,18 @@ export default class {
 
     // create simple mesh
     this.mesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(2, 2, 128, 128),
-      new THREE.ShaderMaterial({
-        side: THREE.DoubleSide,
-        uniforms: {
-          uTime: { value: 0 },
-        },
-        fragmentShader,
-        vertexShader,
-      }),
+      new THREE.SphereGeometry(0.05, 32, 32),
+      new THREE.MeshNormalMaterial(),
     );
-    this.mesh.rotation.x = -Math.PI * 0.5;
     this.scene.add(this.mesh);
   }
 
   render() {
     const elapsedTime = this.clock.getElapsedTime();
+    const progress = (elapsedTime % 1) - 0.5;
 
-    // attributes
-    this.mesh.material.uniforms.uTime.value = elapsedTime;
+    // update objects
+    this.mesh.position.x = progress;
 
     // update render
     this.renderer.render(this.scene, this.camera);
@@ -78,11 +68,21 @@ export default class {
     this.controls.update();
 
     // raf
-    requestAnimationFrame(this.render.bind(this));
+    this.rafId = requestAnimationFrame(this.render.bind(this));
   }
 
   // for destroy this script when navigating between each page
   destroy() {
+    // stop the animation
+    cancelAnimationFrame(this.rafId);
+
+    //remove listener to render
+    this.renderer.domElement.addEventListener("dblclick", null, false);
+    this.scene = null;
+    this.camera = null;
+    this.controls = null;
+
+    // log
     console.log("destroyed", this);
   }
 }

@@ -68,11 +68,21 @@ export default class {
     this.controls.update();
 
     // raf
-    requestAnimationFrame(this.render.bind(this));
+    this.rafId = requestAnimationFrame(this.render.bind(this));
   }
 
   // for destroy this script when navigating between each page
   destroy() {
+    // stop the animation
+    cancelAnimationFrame(this.rafId);
+
+    //remove listener to render
+    this.renderer.domElement.addEventListener("dblclick", null, false);
+    this.scene = null;
+    this.camera = null;
+    this.controls = null;
+
+    // log
     console.log("destroyed", this);
   }
 }
