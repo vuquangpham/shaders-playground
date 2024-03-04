@@ -1,6 +1,9 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+import vertexShader from "./vertex.glsl";
+import fragmentShader from "./fragment.glsl";
+
 export default class {
   constructor({ element }) {
     this.element = element;
@@ -48,18 +51,30 @@ export default class {
 
     // create simple mesh
     this.mesh = new THREE.Mesh(
-      new THREE.SphereGeometry(0.05, 32, 32),
-      new THREE.MeshNormalMaterial(),
+      new THREE.PlaneGeometry(1, 1, 64, 32),
+      new THREE.ShaderMaterial({
+        wireframe: true,
+
+        uniforms: {
+          uTime: {
+            value: 0,
+          },
+        },
+
+        vertexShader,
+        fragmentShader,
+      }),
     );
+    this.mesh.rotation.x = -Math.PI * 0.5;
+    this.mesh.scale.set(2, 1, 1);
     this.scene.add(this.mesh);
   }
 
   render() {
     const elapsedTime = this.clock.getElapsedTime();
-    const progress = (elapsedTime % 1) - 0.5;
 
-    // update objects
-    this.mesh.position.x = progress;
+    // update attributes
+    this.mesh.material.uniforms.uTime.value = elapsedTime;
 
     // update render
     this.renderer.render(this.scene, this.camera);

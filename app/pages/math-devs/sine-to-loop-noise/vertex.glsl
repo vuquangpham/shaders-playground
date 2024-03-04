@@ -20,11 +20,12 @@ void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
   // custom position
+	modelPosition.y = 0.4 * noise(vec2(position.x * 4. + cos(uTime * 4.) , sin(uTime * 4.)));
+
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
   gl_Position = projectedPosition;
-
   vUv = uv;
 }
