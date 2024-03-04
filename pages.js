@@ -21,6 +21,9 @@ module.exports = createPagesPrototype([
       {
         title: "Sine for texture transitions",
       },
+      {
+        title: "Gerstner waves with Sine",
+      },
     ],
   },
 ]);
