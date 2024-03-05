@@ -22,6 +22,9 @@ module.exports = createPagesPrototype([
         title: "Drawing a Square",
       },
       {
+        title: "Moving the shape around the circle",
+      },
+      {
         title: "Sine to smooth transitions",
       },
       {
