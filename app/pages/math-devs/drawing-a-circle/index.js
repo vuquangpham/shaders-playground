@@ -68,16 +68,35 @@ export default class {
         varying vec2 vUv;
         varying vec3 uPosition;
 
-        float circle(vec3 position, vec2 center, float radius) {
+        float circle(vec2 position, vec2 center, float radius) {
           return 1.0 - step(radius, distance(position.xy, center));
+        }
+
+        float circleWithSmoothStep(vec2 position, vec2 center, float radius, float soften) {
+          vec2 pt = position - center;
+          return smoothstep(radius - soften, radius + soften, length(pt));
+        }
+
+        float circleWithStroke(vec2 position, vec2 center, float radius, float strokeWidth) {
+          vec2 pt = position - center;
+          float outCircle = 1.0 - step(radius + strokeWidth * .5, length(pt));
+          float inCircle = 1.0 - step(radius - strokeWidth * .5, length(pt));
+          return outCircle - inCircle;
         }
         
         void main() {
           // draw with position
-          float color = circle(uPosition, vec2(0.), 0.5);
+          // float color = circle(uPosition.xy, vec2(0.), 0.5);
 
           // draw with UV coordinates
-          // float color = circle(vec3(vUv, 0.0), vec2(0.3), 0.2);
+          // float color = circle(vUv, vec2(0.3), 0.2);
+
+          // with smoothstep
+          // float color = circleWithSmoothStep(vUv, vec2(0.5), 0.2, 0.02);
+
+          // with stroke
+          float color = circleWithStroke(vUv, vec2(0.5), 0.2, 0.02);
+
           gl_FragColor = vec4(vec3(color), 1.0);
         }
         `,
