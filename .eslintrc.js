@@ -20,7 +20,7 @@ module.exports = {
     "linebreak-style": [2, "unix"],
 
     // single or double quotes
-    quotes: [1, "double"],
+    quotes: [0, "double"],
 
     // not using var
     "no-var": ["error"],

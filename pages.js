@@ -16,6 +16,12 @@ module.exports = createPagesPrototype([
     base: "math-devs",
     pages: [
       {
+        title: "Drawing a Circle",
+      },
+      {
+        title: "Drawing a Square",
+      },
+      {
         title: "Sine to smooth transitions",
       },
       {
