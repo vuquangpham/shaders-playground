@@ -57,7 +57,6 @@ export default class {
         },
 
         vertexShader: `
-        uniform float uTime;
         varying vec3 uPosition;
         varying vec2 vUv;
 

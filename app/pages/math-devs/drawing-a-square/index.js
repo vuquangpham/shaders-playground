@@ -57,8 +57,9 @@ export default class {
         vertexShader: `
         varying vec3 uPosition;
         varying vec2 vUv;
+
         void main() {
-          gl_Position = vec4(position, 1.) * projectionMatrix * viewMatrix * modelMatrix;
+          gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
           uPosition = position;
           vUv = uv;
         }
