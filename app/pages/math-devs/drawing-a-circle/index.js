@@ -51,15 +51,18 @@ export default class {
     this.mesh = new THREE.Mesh(
       new THREE.PlaneGeometry(2, 2, 32, 32),
       new THREE.ShaderMaterial({
+        side: THREE.DoubleSide,
         uniforms: {
           uTime: { value: 0 },
         },
 
         vertexShader: `
+        uniform float uTime;
         varying vec3 uPosition;
         varying vec2 vUv;
+
         void main() {
-          gl_Position = vec4(position, 1.) * projectionMatrix * viewMatrix * modelMatrix;
+          gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
           uPosition = position;
           vUv = uv;
         }
@@ -74,7 +77,7 @@ export default class {
 
         float circleWithSmoothStep(vec2 position, vec2 center, float radius, float soften) {
           vec2 pt = position - center;
-          return smoothstep(radius - soften, radius + soften, length(pt));
+          return 1. - smoothstep(radius - soften, radius + soften, length(pt));
         }
 
         float circleWithStroke(vec2 position, vec2 center, float radius, float strokeWidth) {
