@@ -3,14 +3,19 @@ import "@/vendors/theme/theme.min";
 
 class App {
   constructor() {
+    // create content
     this.createContent();
+
+    this.createPreloader();
+
     this.createPage();
     this.afterPageLoaded();
-  }
 
-  afterPageLoaded() {
     this.addEventListener();
   }
+
+  createPreloader() {}
+  onPreloaded() {}
 
   createContent() {
     // create ...
@@ -33,6 +38,11 @@ class App {
       const Page = this.pages[this.template].default;
       this.page = new Page();
     });
+  }
+
+  afterPageLoaded() {
+    // Handle links click
+    this.addLinksListener();
   }
 
   dynamicImportPage() {
@@ -97,27 +107,9 @@ class App {
     }
   }
 
-  onPopState() {
-    this.handlePageChange({ url: window.location.pathname, push: false });
-  }
-
-  /**
-   * Listeners
-   * */
-  addEventListener() {
-    // Handle links click
-    this.addLinksListener();
-
-    // handlePopstate
-    if (!this.handlePopstateChange) {
-      this.handlePopstateChange = this.onPopState.bind(this);
-      window.addEventListener("popstate", this.handlePopstateChange);
-    }
-  }
-
   addLinksListener() {
     const links = document.querySelectorAll(
-      "a:not([href^=\"#\"]):not(.dynamic-link-enabled)",
+      'a:not([href^="#"]):not(.dynamic-link-enabled)',
     );
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -144,6 +136,39 @@ class App {
       // current link => not load again
       link.classList.add("dynamic-link-enabled");
     });
+  }
+
+  /**
+   * Listeners
+   * */
+  addEventListener() {
+    // resize
+    window.addEventListener(
+      "resize",
+      window.Theme.debounce(this.onResize.bind(this)),
+    );
+
+    // history api
+    window.addEventListener("popstate", this.onPopState.bind(this));
+  }
+
+  onResize() {}
+
+  onPopState() {
+    // update page
+    this.handlePageChange({ url: window.location.pathname, push: false });
+
+    // for re-active the aside
+    const [slug, id] = window.location.pathname
+      .split("/")
+      .filter((string) => string);
+
+    if (!slug || !id) {
+      return;
+    }
+
+    // active the aside item
+    this.aside.toggleActiveClass(null, this.aside.getAsideItemBySlug(slug, id));
   }
 }
 

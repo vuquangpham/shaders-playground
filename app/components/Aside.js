@@ -71,12 +71,17 @@ export default class Aside extends Component {
     });
   }
 
-  toggleActiveClass(e) {
-    const target = e.target.closest("[data-aside-link]");
+  toggleActiveClass(event, element = null) {
+    const target = element
+      ? element
+      : event.target.closest("[data-aside-link]");
+
+    // target doesn't exist
     if (!target) {
       return;
     }
 
+    // get current active link
     const currentActiveLink = this.element.querySelector(
       "[data-aside-link].active",
     );
@@ -92,5 +97,9 @@ export default class Aside extends Component {
 
     // scroll to active position
     this.scrollToActivePosition();
+  }
+
+  getAsideItemBySlug(slug, id) {
+    return this.element.querySelector(`[data-slug="${slug}"][data-id="${id}"]`);
   }
 }
